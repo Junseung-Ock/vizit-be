@@ -26,12 +26,15 @@ com.vizit.vizitapi
 └── infra           # 외부 연동 (kakao, s3, redis)
 ```
 
-## 개발 규칙
+## 규칙 파일
 
-- 브랜치: `main` (배포) / `dev` (통합) / `feature/xxx` (기능)
-- PR은 `dev`로, 릴리즈만 `main`으로 머지
-- 커밋 컨벤션: `[FEAT]`, `[FIX]`, `[REFACTOR]`, `[DOCS]`, `[TEST]`, `[CHORE]`
-- 이슈 없이 PR 올리지 않기
+상황에 맞는 규칙 파일을 반드시 먼저 읽고 작업한다.
+
+| 파일 | 읽어야 할 때 |
+|------|------------|
+| `.claude/rules/code-style.md` | 새 클래스/도메인 생성, 코드 작성 전 |
+| `.claude/rules/api-conventions.md` | API 엔드포인트 추가, 응답 형식 결정, 에러 처리 |
+| `.claude/rules/git-conventions.md` | 커밋 메시지 작성, 브랜치 생성, PR 올리기 전 |
 
 ## 로컬 실행
 
