@@ -2,11 +2,9 @@
 # 새 브랜치 생성 시 이슈 번호 포함 여부 및 GitHub 이슈 존재 여부 검사
 
 INPUT=$(cat)
-COMMAND=$(echo "$INPUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('command',''))" 2>/dev/null)
+echo "$INPUT" | grep -qE "git (checkout -b|switch -c)" || exit 0
 
-echo "$COMMAND" | grep -qE "git (checkout -b|switch -c)" || exit 0
-
-BRANCH=$(echo "$COMMAND" | grep -oE "(feature|fix|chore)/\S+" | head -1)
+BRANCH=$(echo "$INPUT" | grep -oE "(feature|fix|chore)/\S+" | head -1)
 [ -z "$BRANCH" ] && exit 0
 
 # 이슈 번호 형식 검사

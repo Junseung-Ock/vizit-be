@@ -2,9 +2,7 @@
 # PR 생성 전 현재 이슈에 대한 work-log 문서 존재 여부 확인
 
 INPUT=$(cat)
-COMMAND=$(echo "$INPUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('command',''))" 2>/dev/null)
-
-echo "$COMMAND" | grep -q "gh pr create" || exit 0
+echo "$INPUT" | grep -q "gh pr create" || exit 0
 
 BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null)
 
