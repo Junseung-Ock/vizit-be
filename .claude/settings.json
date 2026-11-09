@@ -21,6 +21,24 @@
             "command": "bash .claude/hooks/check-work-log.sh"
           }
         ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/check-branch-before-edit.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/check-branch-before-edit.sh"
+          }
+        ]
       }
     ]
   }
