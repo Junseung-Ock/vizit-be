@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# $1: 이전 HEAD, $2: 새 HEAD, $3: 1=브랜치 체크아웃 / 0=파일 체크아웃
+IS_BRANCH_CHECKOUT=$3
+[ "$IS_BRANCH_CHECKOUT" != "1" ] && exit 0
+
+PREV_BRANCH=$(git name-rev --name-only "$1" 2>/dev/null | sed 's/~.*//')
+CURRENT_BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null)
+
+if [ "$PREV_BRANCH" = "main" ] && [ "$CURRENT_BRANCH" != "main" ] && [ "$CURRENT_BRANCH" != "develop" ]; then
+  echo ""
+  echo "⛔ 경고: main에서 브랜치를 땄습니다."
+  echo "   feature/*, fix/*, chore/* 브랜치는 develop에서 따야 합니다."
+  echo ""
+  echo "   현재 브랜치($CURRENT_BRANCH)를 삭제하고 develop에서 다시 따세요:"
+  echo "   git checkout develop"
+  echo "   git checkout -b $CURRENT_BRANCH"
+  echo ""
+  exit 1
+fi
+
+exit 0

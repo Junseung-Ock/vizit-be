@@ -36,6 +36,17 @@ com.vizit.vizitapi
 | `.claude/rules/api-conventions.md` | API 엔드포인트 추가, 응답 형식 결정, 에러 처리 |
 | `.claude/rules/git-conventions.md` | 커밋 메시지 작성, 브랜치 생성, PR 올리기 전 |
 
+## 초기 설정
+
+클론 후 아래 명령어를 한 번 실행해 git hook을 활성화한다.
+
+```bash
+git config core.hooksPath .githooks
+```
+
+hook 목록:
+- `post-checkout`: `main`에서 브랜치를 따면 차단. feature/* 는 반드시 `develop`에서 딸 것.
+
 ## 로컬 실행
 
 ```bash
