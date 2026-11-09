@@ -15,6 +15,10 @@
           {
             "type": "command",
             "command": "bash .claude/hooks/check-issue-number.sh"
+          },
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/check-work-log.sh"
           }
         ]
       }
