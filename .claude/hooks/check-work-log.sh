@@ -15,6 +15,9 @@ echo "$BRANCH" | grep -qE "^(feature|fix|chore)/" || exit 0
 ISSUE_NUM=$(echo "$BRANCH" | grep -oE "[0-9]+" | head -1)
 [ -z "$ISSUE_NUM" ] && exit 0
 
+# 원격 브랜치가 없으면 첫 푸시 → work-log 검사 생략
+git ls-remote --exit-code origin "$BRANCH" >/dev/null 2>&1 || exit 0
+
 # work-log 문서 존재 여부 확인
 if ! ls .claude/work-logs/${ISSUE_NUM}-*.md 2>/dev/null | grep -q .; then
   echo "⛔ 이슈 #${ISSUE_NUM}에 대한 작업 문서가 없습니다."

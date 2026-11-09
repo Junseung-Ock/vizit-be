@@ -26,6 +26,15 @@ com.vizit.vizitapi
 └── infra           # 외부 연동 (kakao, s3, redis)
 ```
 
+## 작업 흐름
+
+1. `/start-issue` 호출 → 이슈 생성 + `develop` 최신화 + 브랜치 생성 자동 처리
+2. 코드 작업
+3. `/document-issue` 호출 → `.claude/work-logs/`에 작업 문서 자동 생성
+4. 작업 문서 포함해서 커밋 후 `develop`으로 PR
+
+관련 도메인 작업 시 `.claude/work-logs/`의 문서를 먼저 참고한다.
+
 ## 규칙 파일
 
 상황에 맞는 규칙 파일을 반드시 먼저 읽고 작업한다.
