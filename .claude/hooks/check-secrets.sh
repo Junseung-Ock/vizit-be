@@ -9,7 +9,7 @@ FILES="src/main/resources/application.yml src/main/resources/application-local.y
 
 for file in $FILES; do
   [ -f "$file" ] || continue
-  if grep -qiE "(password|secret|api.?key)\s*:\s*['\"]?[^$\{\s'\"][^'\"\s]{3,}" "$file"; then
+  if grep -iE "(password|secret|api.?key)\s*:\s*.+" "$file" | grep -qvE ':\s*(\$\{|\s*$)'; then
     echo "⛔ [$file] 하드코딩된 민감 정보가 감지됐습니다. 환경 변수로 교체 후 커밋하세요."
     SECRET_FOUND=1
   fi
