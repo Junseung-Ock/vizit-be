@@ -9,18 +9,15 @@ import com.vizit.vizitapi.infra.kakao.KakaoClient;
 import com.vizit.vizitapi.infra.kakao.dto.KakaoUserInfoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class AuthService {
 
     private final KakaoClient kakaoClient;
     private final UserRepository userRepository;
     private final JwtProvider jwtProvider;
 
-    @Transactional
     public TokenResponse kakaoLogin(KakaoLoginRequest request) {
         KakaoUserInfoResponse userInfo = kakaoClient.getUserInfo(request.getAccessToken());
 
