@@ -2,6 +2,7 @@ package com.vizit.vizitapi.global.security.jwt;
 
 import com.vizit.vizitapi.global.exception.CustomException;
 import com.vizit.vizitapi.global.security.CustomUserDetailsService;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,7 +35,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(auth);
-            } catch (CustomException e) {
+            } catch (CustomException | JwtException e) {
                 SecurityContextHolder.clearContext();
             }
         }
