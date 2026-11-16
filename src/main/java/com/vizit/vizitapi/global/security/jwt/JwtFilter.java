@@ -1,5 +1,6 @@
 package com.vizit.vizitapi.global.security.jwt;
 
+import com.vizit.vizitapi.global.exception.CustomException;
 import com.vizit.vizitapi.global.security.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -27,11 +28,15 @@ public class JwtFilter extends OncePerRequestFilter {
         String token = resolveToken(request);
 
         if (token != null && jwtProvider.isValid(token)) {
-            Long userId = jwtProvider.extractUserId(token);
-            UserDetails userDetails = userDetailsService.loadUserById(userId);
-            UsernamePasswordAuthenticationToken auth =
-                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(auth);
+            try {
+                Long userId = jwtProvider.extractUserId(token);
+                UserDetails userDetails = userDetailsService.loadUserById(userId);
+                UsernamePasswordAuthenticationToken auth =
+                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            } catch (CustomException e) {
+                SecurityContextHolder.clearContext();
+            }
         }
 
         filterChain.doFilter(request, response);
