@@ -12,6 +12,7 @@ import com.vizit.vizitapi.infra.kakao.dto.KakaoUserInfoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.support.TransactionTemplate;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +21,7 @@ public class AuthService {
     private final KakaoClient kakaoClient;
     private final UserRepository userRepository;
     private final JwtProvider jwtProvider;
+    private final TransactionTemplate transactionTemplate;
 
     public TokenResponse kakaoLogin(KakaoLoginRequest request) {
         KakaoUserInfoResponse userInfo = kakaoClient.getUserInfo(request.getAccessToken());
@@ -47,9 +49,11 @@ public class AuthService {
             return userRepository.save(User.create(userInfo.getId(), nickname, imageUrl));
         }
 
-        // 닉네임 미동의 시 DB id 기반 기본 닉네임 생성 (두 번 저장)
-        User saved = userRepository.save(User.create(userInfo.getId(), "사용자", imageUrl));
-        saved.updateNickname("사용자" + saved.getId());
-        return userRepository.save(saved);
+        // 닉네임 미동의 시 DB id 기반 기본 닉네임 생성 (두 save를 하나의 트랜잭션으로 묶음)
+        return transactionTemplate.execute(status -> {
+            User saved = userRepository.save(User.create(userInfo.getId(), "사용자", imageUrl));
+            saved.updateNickname("사용자" + saved.getId());
+            return userRepository.save(saved);
+        });
     }
 }
