@@ -16,7 +16,7 @@ public enum ErrorCode {
     AUTH_KAKAO_API_FAILED(HttpStatus.BAD_GATEWAY, "카카오 API 호출에 실패했습니다."),
 
     // Common
-    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류가 발생했습니다.");
+    COMMON_INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류가 발생했습니다.");
 
     private final HttpStatus status;
     private final String message;

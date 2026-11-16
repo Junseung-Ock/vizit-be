@@ -33,7 +33,7 @@ public class AuthService {
                     .orElseGet(() -> createUser(userInfo));
         } catch (DataIntegrityViolationException e) {
             return userRepository.findByKakaoId(userInfo.getId())
-                    .orElseThrow(() -> new CustomException(ErrorCode.INTERNAL_SERVER_ERROR));
+                    .orElseThrow(() -> new CustomException(ErrorCode.COMMON_INTERNAL_SERVER_ERROR));
         }
     }
 
