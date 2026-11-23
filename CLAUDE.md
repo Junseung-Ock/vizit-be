@@ -78,6 +78,7 @@ docker-compose up -d
 
 | 도메인 | 설명 |
 |--------|------|
+| LegalDistrict | 행정안전부 법정동 코드 (시도/시군구/읍면동 계층) — 앱 시작 시 CSV 자동 적재 |
 | User | 카카오 OAuth 로그인, 랭킹 동의, 전국일주 횟수 |
 | Place | 카카오 장소 캐시 + 행정구역 코드 |
 | UserPlace | 유저별 장소 저장 (WISHLIST/VISITED, 공개 범위) |
