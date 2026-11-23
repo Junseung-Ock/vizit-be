@@ -41,7 +41,7 @@
 > - JwtAuthenticationEntryPoint 추가 — 인증 실패 응답을 ApiResponse 형식으로 통일
 > - KakaoClient에 연결/읽기 타임아웃 설정, baseUrl을 application.yml로 분리
 > - ErrorCode 네이밍 컨벤션: 도메인 없는 공통 에러는 COMMON_ 접두사 사용 (예: COMMON_INTERNAL_SERVER_ERROR)
-> - 카카오 API 에러는 HTTP 502 반환 (서버 자체 오류가 아닌 외부 의존성 실패이므로)
+> - 카카오 API 에러 구분: 카카오 4xx(잘못된 토큰 등) → AUTH_INVALID_TOKEN(HTTP 401), 카카오 5xx·연결 실패 → AUTH_KAKAO_API_FAILED(HTTP 502)
 
 ## 다음 작업 시 참고할 점
 > - jwt.secret은 application-local.yml에 직접 설정 (gitignore 처리됨)
