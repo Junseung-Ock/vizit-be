@@ -1,4 +1,8 @@
-# start-issue
+---
+name: start-issue
+description: 새 작업 시작 - GitHub 이슈 생성 + develop 최신화 + 브랜치 생성
+argument-hint: "[작업 제목]"
+---
 
 새 작업을 시작할 때 호출한다. GitHub 이슈 생성부터 브랜치 생성까지 한 번에 처리한다.
 

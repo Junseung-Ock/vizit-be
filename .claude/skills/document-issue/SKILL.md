@@ -1,4 +1,7 @@
-# document-issue
+---
+name: document-issue
+description: 작업 완료 후 work-log 문서 자동 생성 및 CLAUDE.md 업데이트 검토
+---
 
 이슈 작업이 완료됐을 때 호출한다. git 로그와 변경 파일을 분석해 작업 문서를 생성하고 `.claude/work-logs/`에 저장한다.
 
