@@ -30,7 +30,7 @@
 - `domain/auth/controller/AuthController.java` — POST /api/v1/auth/kakao
 - `infra/kakao/KakaoClient.java` — 카카오 유저 정보 API 호출 / 연결·읽기 타임아웃 설정, 예외 세분화 및 cause 보존
 - `infra/kakao/dto/KakaoUserInfoResponse.java` — 카카오 API 응답 매핑
-- `application.yml` — jwt.secret, jwt.expiration-ms, kakao.base-url 환경 변수 참조 추가
+- `application.yml` — jwt.secret, jwt.expiration-ms, kakao.api.base-url 환경 변수 참조 추가
 - `src/test/resources/application-test.yml` — 테스트용 JWT 시크릿 (유효한 Base64 형식)
 
 ## 주요 결정 사항
