@@ -3,6 +3,12 @@ spring:
     name: vizit-api
   profiles:
     active: local
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 1000
+        order_inserts: true
 
 jwt:
   secret: ${JWT_SECRET}
